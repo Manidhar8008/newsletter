@@ -13,7 +13,8 @@ description: "A founder's field paper on building AI systems, products, and a li
 
   {% if lead %}
   <a class="primary-cta" href="{{ lead.url | relative_url }}">
-    <span>Read {{ lead.title }}</span><span aria-hidden="true">→</span>
+    <span>Read {{ lead.title }}</span>
+    <span aria-hidden="true">→</span>
   </a>
   {% endif %}
 </section>
@@ -22,10 +23,10 @@ description: "A founder's field paper on building AI systems, products, and a li
 
 <section class="topic-strip" aria-label="Topics">
   <div class="topic-list">
-    <a href="{{ '/search/?q=local%20models' | relative_url }}"><span class="check-box" aria-hidden="true">□</span> Local Models</a>
-    <a href="{{ '/search/?q=memory' | relative_url }}"><span class="check-box" aria-hidden="true">□</span> Memory Systems</a>
-    <a href="{{ '/search/?q=workflow' | relative_url }}"><span class="check-box" aria-hidden="true">□</span> Solo Workflows</a>
-    <a href="{{ '/search/?q=AI%20systems' | relative_url }}"><span class="check-box" aria-hidden="true">□</span> AI Systems</a>
+    <a href="{{ '/archive/#local-models' | relative_url }}"><span class="check-box" aria-hidden="true">□</span> Local Models</a>
+    <a href="{{ '/archive/#memory' | relative_url }}"><span class="check-box" aria-hidden="true">□</span> Memory Systems</a>
+    <a href="{{ '/archive/#workflows' | relative_url }}"><span class="check-box" aria-hidden="true">□</span> Solo Workflows</a>
+    <a href="{{ '/archive/#agents' | relative_url }}"><span class="check-box" aria-hidden="true">□</span> AI Systems</a>
   </div>
 </section>
 
@@ -44,7 +45,7 @@ description: "A founder's field paper on building AI systems, products, and a li
 
 <section class="story-grid compact-grid">
 {% for issue in site.posts limit:4 offset:1 %}
-  <article class="story-card">
+  <article class="story-card" {% if issue.section == 'FOUNDER STORY' %}id="founder"{% endif %}>
     <div class="eyebrow">{{ issue.section | default: 'DISPATCH' }}</div>
     <h3><a href="{{ issue.url | relative_url }}">{{ issue.title }}</a></h3>
     <p class="story-meta">{{ issue.date | date: "%d %b %Y" }}{% if issue.read_time %} · {{ issue.read_time }} min{% endif %}</p>
@@ -54,15 +55,18 @@ description: "A founder's field paper on building AI systems, products, and a li
 </section>
 
 <section class="persona-panel">
-  <div>
-    <div class="eyebrow">THE FOUNDER</div>
-    <h2>Manidhar Pati</h2>
-    <p>Solopreneur and builder in Warangal, India. I document what I build, what breaks, what changes, and the question that follows.</p>
+  <div class="persona-identity">
+    <img class="persona-avatar" src="{{ site.author.photo | relative_url }}" alt="Manidhar Pati">
+    <div>
+      <div class="eyebrow">THE FOUNDER</div>
+      <h2>Manidhar Pati</h2>
+      <p>Solopreneur and builder in Warangal, India. I document what I build, what breaks, what changes, and the question that follows.</p>
+    </div>
   </div>
   <div class="persona-links">
-    <a href="{{ '/author/' | relative_url }}" class="text-link">Founder profile →</a>
-    <a href="https://github.com/Manidhar8008" class="text-link">GitHub →</a>
-    <a href="{{ site.author.portfolio }}" class="text-link">Portfolio →</a>
+    <a href="{{ '/founder-story/' | relative_url }}" class="text-link">Founder story →</a>
+    <a href="{{ site.author.linkedin }}" class="text-link">LinkedIn →</a>
+    <a href="{{ site.author.youtube }}" class="text-link">YouTube →</a>
   </div>
 </section>
 
@@ -71,20 +75,12 @@ description: "A founder's field paper on building AI systems, products, and a li
     <div class="eyebrow">THE NEXT DISPATCH</div>
     <h2>Stay close to the work.</h2>
     <p>One useful dispatch from the actual work. No generic AI news dump.</p>
-    {% unless site.email.enabled and site.email.form_action %}
-      <div class="subscribe-note">Email collection is being wired to the publication service. The current visual form does not claim to store addresses.</div>
-    {% endunless %}
   </div>
-  {% if site.email.enabled and site.email.form_action %}
-  <form class="inline-subscribe" action="{{ site.email.form_action }}" method="post">
+  <form class="inline-subscribe" action="{{ '/subscribe/' | relative_url }}" method="get">
     <label class="sr-only" for="home-email">Email address</label>
     <input id="home-email" name="email" type="email" placeholder="your@email.com" autocomplete="email" required>
-    <input type="hidden" name="tag" value="website">
-    <button type="submit" aria-label="Subscribe">→</button>
+    <button type="submit" aria-label="Continue to subscription">→</button>
   </form>
-  {% else %}
-  <a class="primary-cta" href="{{ '/subscribe/' | relative_url }}"><span>Set up subscription</span><span aria-hidden="true">→</span></a>
-  {% endif %}
 </section>
 
 <div class="section-rule"><span>RECENT</span></div>
