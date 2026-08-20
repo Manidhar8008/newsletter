@@ -1,0 +1,1 @@
+The newsletter repository has been audited for duplicate routes and temporary deployment artifacts. See AUDIT.md.
