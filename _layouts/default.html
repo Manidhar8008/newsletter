@@ -1,17 +1,48 @@
 <!doctype html>
 <html lang="{{ site.lang | default: 'en' }}" class="light">
 <head>
+  {% seo %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff" id="theme-color">
   <meta name="color-scheme" content="light dark">
-  <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   {% feed_meta %}
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}">
+  <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+  <script type="application/ld+json">
+  {% if page.layout == 'post' %}
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":{{ page.title | jsonify }},
+    "description":{{ page.description | default: site.description | jsonify }},
+    "datePublished":{{ page.date | date_to_xmlschema | jsonify }},
+    "author":{"@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ '/about/' | absolute_url | jsonify }}},
+    "publisher":{"@type":"Person","name":{{ site.author.name | jsonify }}},
+    "mainEntityOfPage":{"@type":"WebPage","@id":{{ page.url | absolute_url | jsonify }}}
+  }
+  {% else %}
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":{{ site.title | jsonify }},
+    "url":{{ site.url | append: site.baseurl | jsonify }},
+    "description":{{ site.description | jsonify }},
+    "publisher":{"@type":"Person","name":{{ site.author.name | jsonify }}}
+  }
+  {% endif %}
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -19,19 +50,21 @@
       <a class="brand" href="{{ '/' | relative_url }}">The AI Builder Dispatch</a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="{{ '/' | relative_url }}">Latest</a>
+        <a href="{{ '/search/' | relative_url }}">Search</a>
         <a href="{{ '/founder-story/' | relative_url }}">Founder</a>
         <a href="{{ '/archive/' | relative_url }}">Archive</a>
         <a href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
         <a href="{{ '/about/' | relative_url }}">About</a>
       </nav>
       <div class="header-actions">
-        <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode"><span class="theme-icon" aria-hidden="true">☾</span></button>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Switch theme" title="Switch theme"><span class="theme-icon" aria-hidden="true">☾</span></button>
         <button class="menu-btn" type="button" data-menu-toggle aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu"><span class="menu-icon" aria-hidden="true"></span></button>
       </div>
     </div>
     <nav id="mobile-nav" class="mobile-nav" data-mobile-nav aria-label="Mobile navigation">
       <a href="{{ '/' | relative_url }}">Latest</a>
-      <a href="{{ '/founder-story/' | relative_url }}">Founder Story</a>
+      <a href="{{ '/search/' | relative_url }}">Search</a>
+      <a href="{{ '/founder-story/' | relative_url }}">Founder</a>
       <a href="{{ '/archive/' | relative_url }}">Archive</a>
       <a href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
@@ -43,13 +76,17 @@
   </main>
 
   <footer class="site-footer">
-    <div><strong>The AI Builder Dispatch</strong> · Manidhar Pati · Warangal, India</div>
+    <div><strong>The AI Builder Dispatch</strong> · {{ site.author.name }} · {{ site.author.location }}</div>
     <div class="footer-links">
       <a href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
+      <a href="{{ '/search/' | relative_url }}">Search</a>
       <a href="{{ '/archive/' | relative_url }}">Archive</a>
       <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
-      <a href="https://github.com/Manidhar8008">GitHub</a>
+      <a href="{{ site.author.github }}">GitHub</a>
+      <a href="{{ site.author.portfolio }}">Portfolio</a>
+      {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}">LinkedIn</a>{% endif %}
+      {% if site.author.youtube %}<a href="{{ site.author.youtube }}">YouTube</a>{% endif %}
     </div>
   </footer>
 
