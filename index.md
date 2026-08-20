@@ -55,8 +55,8 @@ description: "A founder's field paper on building AI systems, products, and a li
 </section>
 
 <section class="persona-panel">
-  <div class="persona-identity" style="display:flex;align-items:flex-start;gap:16px;">
-    <img src="{{ site.author.photo | relative_url }}" alt="Manidhar Pati" style="width:76px;height:76px;border-radius:50%;object-fit:cover;display:block;flex:0 0 auto;">
+  <div class="persona-identity">
+    <img src="{{ site.author.photo }}" alt="Manidhar Pati" loading="lazy" referrerpolicy="no-referrer" style="width:76px;height:76px;border-radius:50%;object-fit:cover;display:block;flex:0 0 auto;">
     <div>
       <div class="eyebrow">THE FOUNDER</div>
       <h2>Manidhar Pati</h2>
@@ -65,6 +65,7 @@ description: "A founder's field paper on building AI systems, products, and a li
   </div>
   <div class="persona-links">
     <a href="{{ '/founder-story/' | relative_url }}" class="text-link">Founder story →</a>
+    <a href="{{ site.author.github }}" class="text-link">GitHub →</a>
     <a href="{{ site.author.linkedin }}" class="text-link">LinkedIn →</a>
     <a href="{{ site.author.youtube }}" class="text-link">YouTube →</a>
   </div>
