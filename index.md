@@ -1,67 +1,70 @@
 ---
 layout: default
 title: The AI Builder Dispatch
+description: "A founder's field paper on building AI systems, products, and a life around the work."
 ---
 
-<div class="masthead-meta">
-  <span>THE WEEKLY BUILDING PAPER</span>
-  <span>WARANGAL · INDIA</span>
-  <span>EDITION 001</span>
-</div>
-
-<section class="hero">
-  <p class="kicker">AI · SYSTEMS · FOUNDER LIFE</p>
-  <h1>The AI Builder Dispatch</h1>
-  <p class="hero-copy">A newspaper for the work behind the work: systems built, lessons earned, products tested, and a founder documenting the process in public.</p>
+<section class="front-page-intro">
+  <div>
+    <p class="kicker">THE AI BUILDER DISPATCH · ISSUE 001</p>
+    <h1>A field paper from the work.</h1>
+  </div>
+  <p class="intro-copy">I build systems, break them, rebuild them, and write down what changes. This is the record: the questions before the build, the systems underneath it, and the next question that appears after.</p>
 </section>
 
-<section class="feature-grid">
-  <article class="feature feature-main">
-    <p class="section-label">FOUNDER STORY</p>
-    <h2><a href="{{ '/founder-story/' | relative_url }}">The Founder Story</a></h2>
-    <p>A continuing record of the person behind the systems — where the work started, what changed, and why the next system keeps getting bigger.</p>
-    <a class="read-link" href="{{ '/founder-story/' | relative_url }}">Read the story →</a>
-  </article>
+{% assign lead = site.posts | first %}
+{% if lead %}
+<section class="lead-story">
+  <div class="lead-meta">{{ lead.date | date: "%d %B %Y" }} · {{ lead.section | default: 'DISPATCH' }}</div>
+  <h2><a href="{{ lead.url | relative_url }}">{{ lead.title }}</a></h2>
+  <p>{{ lead.description | default: lead.excerpt | strip_html | truncate: 360 }}</p>
+  <a class="read-link" href="{{ lead.url | relative_url }}">Read the dispatch →</a>
+</section>
+{% endif %}
 
-  <article class="feature">
-    <p class="section-label">SYSTEMS DESK</p>
-    <h2>Vasuki & AI Infrastructure</h2>
-    <p>Architecture notes, agent design, memory systems, local-first infrastructure, and the decisions behind the stack.</p>
-    <a class="read-link" href="{{ '/archive/' | relative_url }}">Enter the desk →</a>
+<section class="story-grid">
+{% for issue in site.posts limit:4 offset:1 %}
+  <article class="story-card">
+    <p class="section-label">{{ issue.section | default: 'DISPATCH' }}</p>
+    <h3><a href="{{ issue.url | relative_url }}">{{ issue.title }}</a></h3>
+    <p class="story-meta">{{ issue.date | date: "%d %b %Y" }}{% if issue.read_time %} · {{ issue.read_time }} min{% endif %}</p>
+    <p>{{ issue.description | default: issue.excerpt | strip_html | truncate: 190 }}</p>
   </article>
-
-  <article class="feature">
-    <p class="section-label">BUILD LOG</p>
-    <h2>What Got Built</h2>
-    <p>Real implementation notes from projects, experiments, debugging sessions, launches, and failures.</p>
-    <a class="read-link" href="{{ '/archive/' | relative_url }}">Open the log →</a>
-  </article>
-
-  <article class="feature">
-    <p class="section-label">FIELD NOTES</p>
-    <h2>Thinking in Public</h2>
-    <p>Short observations about building, automation, leverage, product strategy, and the economics of doing more with less.</p>
-    <a class="read-link" href="{{ '/archive/' | relative_url }}">Read field notes →</a>
-  </article>
+{% endfor %}
 </section>
 
-<div class="section-rule"><span>LATEST EDITION</span></div>
+<section class="founder-strip">
+  <div>
+    <p class="section-label">THE FOUNDER</p>
+    <h2>Manidhar Pati</h2>
+    <p>Solopreneur and builder in Warangal, India. I am documenting the systems, experiments, constraints, and decisions behind the work.</p>
+  </div>
+  <a class="read-link" href="{{ '/founder-story/' | relative_url }}">Read the Founder Story →</a>
+</section>
 
-<section class="latest-list">
-{% for issue in site.posts limit:8 %}
-  <article class="issue-row">
+<section class="subscribe-strip">
+  <div>
+    <p class="section-label">THE NEXT EDITION</p>
+    <h2>Get the next dispatch.</h2>
+    <p>The website is live now. Email delivery is the next layer; the publication is being kept independent of the email provider.</p>
+  </div>
+  <a class="subscribe-button" href="{{ '/subscribe/' | relative_url }}">Subscribe →</a>
+</section>
+
+<div class="section-rule"><span>RECENT</span></div>
+
+<section class="archive-preview">
+{% for issue in site.posts limit:10 %}
+  <article class="archive-row">
     <div class="issue-date">{{ issue.date | date: "%d %b %Y" }}</div>
     <div>
       <p class="section-label">{{ issue.section | default: 'DISPATCH' }}</p>
-      <h2><a href="{{ issue.url | relative_url }}">{{ issue.title }}</a></h2>
-      <p>{{ issue.description | default: issue.excerpt | strip_html | truncate: 240 }}</p>
+      <h3><a href="{{ issue.url | relative_url }}">{{ issue.title }}</a></h3>
     </div>
   </article>
 {% endfor %}
 </section>
 
-<section class="closing-note">
-  <p class="section-label">WHY THIS EXISTS</p>
-  <p>This is not a generic AI news feed. It is a documented trail of building: one system, one experiment, one hard lesson at a time.</p>
-  <a class="read-link" href="{{ '/archive/' | relative_url }}">View the complete archive →</a>
-</section>
+<div class="archive-link-row">
+  <a class="read-link" href="{{ '/archive/' | relative_url }}">Open the complete archive →</a>
+</div>
