@@ -3,8 +3,22 @@ layout: default
 ---
 
 <article class="issue">
-  <p class="eyebrow">{{ page.section | default: 'DISPATCH' }} · {{ page.date | date: "%d %B %Y" }}</p>
+  <div class="article-meta">
+    <span>{{ page.section | default: 'DISPATCH' }}</span>
+    <span>·</span>
+    <span>{{ page.date | date: "%d %B %Y" }}</span>
+    {% if page.read_time %}<span>·</span><span>{{ page.read_time }} min read</span>{% endif %}
+    <span>·</span>
+    <span>Manidhar Pati</span>
+  </div>
+
   <h1>{{ page.title }}</h1>
   {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+
   <div class="content">{{ content }}</div>
+
+  <div class="article-bottom">
+    <strong>Manidhar Pati</strong> · Warangal, India<br>
+    Building systems, documenting the questions, and following the next question.
+  </div>
 </article>
