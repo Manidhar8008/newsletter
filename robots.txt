@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://manidhar8008.github.io/newsletter/sitemap.xml
