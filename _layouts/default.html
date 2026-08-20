@@ -13,16 +13,26 @@
     <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
     <nav>
       <a href="{{ '/' | relative_url }}">Latest</a>
-      <a href="{{ '/founder-story/' | relative_url }}">Founder Story</a>
+      <a href="{{ '/founder-story/' | relative_url }}">Founder</a>
       <a href="{{ '/archive/' | relative_url }}">Archive</a>
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      <a href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
     </nav>
   </header>
   <main class="container">
     {{ content }}
   </main>
   <footer class="site-footer">
-    <span>The AI Builder Dispatch · Published with GitHub Pages</span>
+    <div>
+      <strong>The AI Builder Dispatch</strong>
+      <span> · Manidhar Pati · Warangal, India</span>
+    </div>
+    <div class="footer-links">
+      <a href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
+      <a href="{{ '/archive/' | relative_url }}">Archive</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+    </div>
   </footer>
 </body>
 </html>
