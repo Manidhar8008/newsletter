@@ -28,8 +28,8 @@
     "headline":{{ page.title | jsonify }},
     "description":{{ page.description | default: site.description | jsonify }},
     "datePublished":{{ page.date | date_to_xmlschema | jsonify }},
-    "author":{"@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ '/about/' | absolute_url | jsonify }}},
-    "publisher":{"@type":"Person","name":{{ site.author.name | jsonify }}},
+    "author":{"@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ '/author/' | absolute_url | jsonify }}},
+    "publisher":{"@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ '/author/' | absolute_url | jsonify }}},
     "mainEntityOfPage":{"@type":"WebPage","@id":{{ page.url | absolute_url | jsonify }}}
   }
   {% else %}
@@ -39,7 +39,7 @@
     "name":{{ site.title | jsonify }},
     "url":{{ site.url | append: site.baseurl | jsonify }},
     "description":{{ site.description | jsonify }},
-    "publisher":{"@type":"Person","name":{{ site.author.name | jsonify }}}
+    "publisher":{"@type":"Person","name":{{ site.author.name | jsonify }},"url":{{ '/author/' | absolute_url | jsonify }}}
   }
   {% endif %}
   </script>
@@ -83,6 +83,9 @@
       <a href="{{ '/archive/' | relative_url }}">Archive</a>
       <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/author/' | relative_url }}">Founder</a>
+      <a href="{{ '/contact/' | relative_url }}">Contact</a>
+      <a href="{{ '/privacy/' | relative_url }}">Privacy</a>
       <a href="{{ site.author.github }}">GitHub</a>
       <a href="{{ site.author.portfolio }}">Portfolio</a>
       {% if site.author.linkedin %}<a href="{{ site.author.linkedin }}">LinkedIn</a>{% endif %}
