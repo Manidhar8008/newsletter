@@ -5,6 +5,8 @@ description: "How a process-driven beginning turned into a search for leverage, 
 date: 2026-08-20
 categories: [founder]
 section: "FOUNDER STORY"
+read_time: 6
+tags: [founder, systems, automation, AI, Vasuki, MW.AI]
 ---
 
 I did not begin by trying to build an AI company.
