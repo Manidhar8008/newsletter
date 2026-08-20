@@ -5,6 +5,8 @@ description: "Before the product, there is usually a page full of questions."
 date: 2026-08-20
 categories: [founder]
 section: "FOUNDER STORY"
+read_time: 7
+tags: [founder, questions, systems, solopreneur, local-models, automation]
 ---
 
 I usually don't start with a product.
