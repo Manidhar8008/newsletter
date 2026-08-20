@@ -1,0 +1,10 @@
+title: "The AI Builder Dispatch"
+description: "Notes on AI systems, building, automation, and the road from idea to execution."
+url: "https://manidhar8008.github.io"
+baseurl: "/newsletter"
+lang: "en"
+markdown: kramdown
+permalink: /issues/:year/:month/:day/:title/
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
