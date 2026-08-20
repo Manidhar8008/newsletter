@@ -35,15 +35,15 @@ permalink: /subscribe/
   <section id="provider-setup" class="subscribe-explainer">
     <div class="eyebrow">EMAIL INFRASTRUCTURE</div>
     <h2>Kit is the first provider target.</h2>
-    <p>Kit currently offers a free Newsletter Plan for up to 10,000 subscribers, unlimited email sends, forms, a newsletter feed, and a welcome sequence. citeturn244007search0turn244007search1</p>
+    <p>We are using Kit as the first email service target because its current free Newsletter Plan supports up to 10,000 subscribers and includes unlimited sends, forms, a newsletter feed, and a welcome sequence.</p>
     <ol>
       <li>Create the free Kit Newsletter account.</li>
       <li>Create an inline Form for The AI Builder Dispatch.</li>
       <li>Enable the confirmation email and a one-email welcome sequence.</li>
-      <li>Copy the Form embed/action details into the repository configuration.</li>
+      <li>Give me the Form embed/action details so I can wire this static site to it.</li>
     </ol>
-    <p>Kit supports JavaScript and HTML form embeds, so the GitHub Pages site can use the provider without moving the publication itself. citeturn583636search1turn583636search3</p>
+    <p>Kit supports JavaScript and HTML form embeds, so GitHub Pages can remain the public publication while Kit handles subscriber storage and email delivery.</p>
   </section>
 
-  <p class="subscribe-note">No subscriber address is stored by this GitHub Pages site itself. Once Kit is connected, the provider becomes the subscriber system of record.</p>
+  <p class="subscribe-note">No subscriber address is stored by this GitHub Pages site itself. Once Kit is connected, Kit becomes the subscriber system of record.</p>
 </article>
