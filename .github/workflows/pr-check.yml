@@ -41,7 +41,7 @@ jobs:
       JEKYLL_ENV: production
     steps:
       - name: Check out pull request source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Configure GitHub Pages
         id: pages
