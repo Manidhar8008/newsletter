@@ -1,0 +1,85 @@
+name: Newsletter PR Checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "_posts/**"
+      - "_layouts/**"
+      - "_includes/**"
+      - "assets/**"
+      - "about/**"
+      - "archive/**"
+      - "subscribe/**"
+      - "founder-story/**"
+      - "search/**"
+      - "*.md"
+      - "_config.yml"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - ".ruby-version"
+      - "scripts/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build and audit without deploying
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: read
+    env:
+      JEKYLL_ENV: production
+    steps:
+      - name: Check out pull request source
+        uses: actions/checkout@v4
+
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Set up Ruby from .ruby-version and cache Bundler/Jekyll
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Report runtime versions
+        run: |
+          ruby --version
+          bundle --version
+          bundle exec jekyll --version
+
+      - name: Verify dependency installation
+        run: bundle check
+
+      - name: Check Jekyll configuration
+        run: bundle exec jekyll doctor --trace
+
+      - name: Clean generated output
+        run: bundle exec jekyll clean
+
+      - name: Build pull request without publishing future posts
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: bundle exec jekyll build --profile --trace --strict_front_matter --baseurl "$PAGES_BASE_PATH"
+
+      - name: Audit HTML, links, image alt attributes, metadata, and RSS
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: python3 scripts/check_site.py --site _site --baseurl "$PAGES_BASE_PATH"
+
+      - name: Summarize PR build
+        run: |
+          echo "## Pull request build" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Commit: $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Site size: $(du -sh _site | cut -f1)" >> "$GITHUB_STEP_SUMMARY"
