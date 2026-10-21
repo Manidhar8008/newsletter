@@ -126,7 +126,7 @@ jobs:
         if: inputs.draft_mode != true
         uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages-${{ github.sha }}
+          name: github-pages
           path: _site
 
   deploy:
